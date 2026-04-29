@@ -1,6 +1,6 @@
 # KELAR.IN Repository Tugas Akhir
 
-### Anggota Kelompok
+### Anggota Kelompok 2
 | NIM | Nama |
 |-----|------|
 | 251402003 | Hafiz Ahmad Aulia Situmeang |
