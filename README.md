@@ -16,7 +16,7 @@ Pemrograman Web Lanjut (PWL)
 ---
 
 ### Penjelasan Web
-**KELAR.IN** (Sistem Manajemen Repositori Tugas Akhir) merupakan platform digital yang dirancang khusus untuk Universitas guna memfasilitasi pengelolaan, pengarsipan, dan publikasi skripsi mahasiswa secara terpusat. Sistem ini mengintegrasikan seluruh alur pemberkasan mulai dari tahap unggah dokumen oleh mahasiswa, verifikasi oleh operator program studi, hingga persetujuan akhir oleh Ketua Program Studi (Kaprodi), sehingga seluruh dokumen karya ilmiah dapat terdokumentasi dengan rapi dan aman.
+**KELAR.IN** (Sistem Manajemen Repositori Tugas Akhir) merupakan platform digital yang dirancang khusus untuk Universitas, gunanya untuk  memfasilitasi pengelolaan, pengarsipan, dan publikasi skripsi mahasiswa secara terpusat. Sistem ini mengintegrasikan seluruh alur pemberkasan mulai dari tahap unggah dokumen oleh mahasiswa, verifikasi oleh operator program studi, hingga persetujuan akhir oleh Ketua Program Studi (Kaprodi), sehingga seluruh dokumen karya ilmiah dapat terdokumentasi dengan rapi dan aman.
 
 Sistem ini memiliki fitur privasi dokumen yang memisahkan antara dokumen yang boleh diakses publik secara luas (Open Access) dan dokumen internal yang hanya boleh diakses oleh civitas akademika yang telah memiliki akun terdaftar.
 
