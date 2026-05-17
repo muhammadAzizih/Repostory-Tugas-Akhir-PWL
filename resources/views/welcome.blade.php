@@ -544,7 +544,7 @@
                         </div>
                         <div class="doc-author-row" style="margin-top:14px; padding-top:12px; border-top:1px solid #f1f5f9;">
                             <div class="doc-avatar">AR</div>
-                            <div class="doc-author-name">Ahmad Rizky · 2025</div>
+                            <div class="doc-author-name">Laravelia E. · 2025</div>
                         </div>
                     </div>
 
