@@ -40,13 +40,13 @@ class WelcomeController extends Controller
         $jurusans    = Jurusan::all();
         $jenjangList = Jurusan::select('jenjang')->distinct()->orderBy('jenjang')->pluck('jenjang');
 
-        // Latest published doc — used in hero mockup card
+      
         $latestDoc = Skripsi::with(['user', 'jurusan'])
             ->where('status', 'published')
             ->latest()
             ->first();
 
-        // Real stats from DB
+     
         $stats = [
             'total_docs'     => Skripsi::where('status', 'published')->count(),
             'total_authors'  => User::whereHas('skripsi', fn($q) => $q->where('status', 'published'))->count(),
