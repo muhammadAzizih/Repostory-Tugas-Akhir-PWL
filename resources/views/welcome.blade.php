@@ -2,9 +2,7 @@
 @section('page_title', 'Beranda')
 @section('content')
 <style>
-/* ============================================
-   DESIGN TOKENS — preserve color palette
-   ============================================ */
+
 :root {
     --em-50:  #ecfdf5;
     --em-100: #d1fae5;
@@ -15,9 +13,7 @@
     --em-900: #064e3b;
 }
 
-/* ============================================
-   ANIMATIONS
-   ============================================ */
+
 @keyframes floatA { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-12px) rotate(2deg)} }
 @keyframes floatB { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-8px) rotate(-1deg)} }
 @keyframes floatC { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
@@ -30,10 +26,7 @@
     from { opacity: 0; transform: translateY(30px) scale(0.96); }
     to   { opacity: 1; transform: translateY(0)   scale(1); }
 }
-
-/* ============================================
-   HERO SECTION
-   ============================================ */
+  
 .hero-wrap {
     background: linear-gradient(135deg, #d1fae5, #a7f3d0, #ecfdf5, #bbf7d0, #f0fdf4);
     background-size: 300% 300%;
@@ -71,16 +64,16 @@
     animation: fadeUp .6s .15s ease both;
 }
 
-/* Decorative blobs */
+
 .hero-blob-1, .hero-blob-2 { display: none; }
-/* grid dot texture on hero left */
+
 .hero-dots {
     position:absolute; inset:0; z-index:0; pointer-events:none;
     background-image: radial-gradient(circle, #10b98115 1px, transparent 1px);
     background-size: 28px 28px;
 }
 
-/* Badge pill */
+
 .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: white; border: 1px solid var(--em-100);
@@ -99,7 +92,7 @@
     animation: pulse-ring 1.5s ease-out infinite;
 }
 
-/* Headline */
+
 .hero-h1 {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
@@ -118,7 +111,7 @@
     margin-bottom: 32px; font-weight: 500; max-width: 400px;
 }
 
-/* Stats row */
+
 .hero-stats {
     display: flex; gap: 24px; margin-bottom: 36px; flex-wrap: wrap;
 }
@@ -131,7 +124,7 @@
 .stat-label { font-size: .7rem; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: .8px; margin-top: 2px; }
 .stat-divider { width: 1px; background: #e5e7eb; align-self: stretch; }
 
-/* Search bar — premium */
+
 .hero-search-wrap {
     background: white;
     border-radius: 16px;
@@ -171,12 +164,10 @@
     box-shadow: 0 4px 12px rgba(16,185,129,.35);
 }
 
-/* ============================================
-   FLOATING VISUAL ELEMENTS (right side)
-   ============================================ */
+
 .hero-visual { position: relative; width: 100%; max-width: 420px; height: 420px; }
 
-/* Document mockup */
+
 .doc-mockup {
     background: white;
     border-radius: 20px;
@@ -231,7 +222,7 @@
 }
 .doc-author-name { font-size: .7rem; color: #6b7280; font-weight: 500; }
 
-/* Floating card: verified badge */
+
 .float-badge-verified {
     position: absolute; top: 12%; left: -8%;
     background: white; border-radius: 14px;
@@ -246,9 +237,8 @@
 .float-badge-verified .text { font-size: .72rem; font-weight: 700; color: #111827; }
 .float-badge-verified .sub  { font-size: .62rem; color: #6b7280; }
 
-/* float-new-upload removed */
 
-/* Floating mini card top right */
+
 .float-mini-card {
     position: absolute; top: 5%; right: 2%;
     background: white; border-radius: 12px;
@@ -261,7 +251,7 @@
 .float-mini-card .ft { font-size: .68rem; font-weight: 700; color: #111827; }
 .float-mini-card .fs { font-size: .6rem; color: #9ca3af; }
 
-/* Background decorative circles */
+
 .hero-ring-1 {
     position:absolute; width:340px; height:340px;
     border-radius:50%; border: 2px dashed var(--em-100);
@@ -275,9 +265,6 @@
     z-index:1; pointer-events:none;
 }
 
-/* ============================================
-   FILTER BAR
-   ============================================ */
 .filter-bar-wrap {
     background: white;
     border-radius: 16px;
@@ -325,17 +312,10 @@
     white-space: nowrap;
 }
 
-/* ============================================
-   SECTION TITLE
-   ============================================ */
 .section-header { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
 .section-title { font-size: 1.15rem; font-weight: 800; color: #111827; margin: 0; }
 .section-sub   { font-size: .78rem; color: #9ca3af; font-weight: 500; }
 
-/* ============================================
-   DOCUMENT CARDS
-   ============================================ */
-.doc-card {
     background: white;
     border-radius: 20px;
     border: 1.5px solid #f1f5f9;
@@ -406,7 +386,7 @@
 }
 .doc-card:hover .card-arrow { background: var(--em-500); color: white; transform: rotate(-45deg); }
 
-/* nth-child stagger */
+
 .doc-card:nth-child(1) { animation-delay: .05s }
 .doc-card:nth-child(2) { animation-delay: .1s }
 .doc-card:nth-child(3) { animation-delay: .15s }
@@ -416,9 +396,6 @@
 .doc-card:nth-child(7) { animation-delay: .35s }
 .doc-card:nth-child(8) { animation-delay: .4s }
 
-/* ============================================
-   EMPTY STATE
-   ============================================ */
 .empty-state {
     text-align: center; padding: 80px 24px;
     background: white; border-radius: 24px;
@@ -441,9 +418,6 @@
 }
 .suggestion-chip:hover { background: var(--em-100); color: var(--em-800); transform: translateY(-1px); }
 
-/* ============================================
-   PAGINATION
-   ============================================ */
 .pagination-wrap { margin-top: 48px; display: flex; justify-content: center; }
 .pagination-wrap .pagination { gap: 4px; margin: 0; }
 .pagination-wrap .page-item .page-link {
@@ -458,9 +432,6 @@
 }
 .pagination-wrap .page-item.disabled .page-link { opacity: .4; }
 
-/* ============================================
-   RESPONSIVE
-   ============================================ */
 @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-right { display: none; }
@@ -480,9 +451,7 @@
 
 <div class="container-fluid px-md-3 pb-5">
 
-    {{-- ═══════════════════════════════════════
-         HERO SECTION
-    ═══════════════════════════════════════ --}}
+   
     <div class="hero-wrap">
         <div class="hero-dots"></div>
         <div class="hero-blob-1"></div>
@@ -734,9 +703,7 @@
 
 </div>
 
-{{-- ═══════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════ --}}
+
 <footer class="site-footer">
     <div class="footer-inner">
         <div class="footer-brand">
