@@ -65,27 +65,31 @@
 
         /* Layout */
         .layout-wrapper {
-            display: flex;
             min-height: 100vh;
         }
 
         /* Sidebar Modern */
         .sidebar-wrapper {
-            width: 280px;
             position: fixed;
-            height: 100vh;
+            top: 72px;
+            left: 0;
+            width: 280px;
+            height: calc(100vh - 72px);
             padding: 20px;
-            z-index: 1020;
+            transition: all 0.3s ease;
+            z-index: 1040;
         }
+
         .sidebar {
             background: white;
             border-radius: 20px;
             height: 100%;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
             overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
+
         .sidebar::-webkit-scrollbar { width: 6px; }
         .sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
@@ -122,11 +126,10 @@
 
         /* Main Content Area */
         .main-wrapper {
-            flex-grow: 1;
             margin-left: 280px;
-            padding: 20px 30px 40px 30px;
+            padding: 115px 30px 40px;
             min-height: 100vh;
-            transition: margin-left 0.3s;
+            transition: all 0.3s ease;
         }
 
         /* Navbar Modern */
@@ -139,13 +142,42 @@
             margin-bottom: 30px;
             box-shadow: 0 2px 16px rgba(0,0,0,.05), 0 0 0 1px rgba(255,255,255,.7) inset;
             border: 1px solid rgba(255,255,255,.6);
-            position: sticky;
-            top: 16px;
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            height: 72px;
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             transition: box-shadow .3s, background .3s;
         }
         .top-navbar:hover {
             box-shadow: 0 4px 24px rgba(0,0,0,.07), 0 0 0 1px rgba(255,255,255,.8) inset;
+        }
+
+        /* Footer */
+        .footer-full {
+            margin-left: 280px;
+            transition: all 0.3s ease;
+        }
+
+        /* Collapse Sidebar */
+        .layout-wrapper.sidebar-collapsed .sidebar-wrapper {
+            transform: translateX(-100%);
+        }
+        .layout-wrapper.sidebar-collapsed .main-wrapper {
+            margin-left: 0;
+            width: 100%;
+        }
+        .layout-wrapper.sidebar-collapsed .footer-full {
+            margin-left: 0;
+        }
+
+        /* Sidebar Backdrop */
+        .sidebar-backdrop {
+            display: none;
         }
 
         .avatar-img {
@@ -156,9 +188,33 @@
 
         /* Responsive */
         @media (max-width: 991.98px) {
-            .sidebar-wrapper { transform: translateX(-100%); transition: transform 0.3s; }
+            .sidebar-wrapper { 
+                transform: translateX(-100%); 
+                transition: transform 0.3s; 
+            }
             .sidebar-wrapper.show { transform: translateX(0); }
-            .main-wrapper { margin-left: 0; padding: 15px; }
+            .sidebar-backdrop {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.35);
+                opacity: 0;
+                pointer-events: none;
+                transition: 0.3s;
+                z-index: 1035;
+            }
+            .sidebar-wrapper.show + .sidebar-backdrop {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .main-wrapper { 
+                margin-left: 0;
+                width: 100%;
+                padding: 95px 18px 30px;
+            }
+            .footer-full {
+                margin-left: 0;
+            }
             .top-navbar { top: 15px; }
         }
 
@@ -176,20 +232,23 @@
     <div class="layout-wrapper">
         @auth
         <!-- Sidebar -->
-        <div class="sidebar-wrapper d-none d-lg-block" id="sidebar">
+        <div class="sidebar-wrapper "id="sidebar">
             <div class="sidebar">
-                <div class="brand-section">
-                    <h4 class="fw-bolder mb-0 d-flex align-items-center gap-2" style="color: var(--primary);">
+                <div class="brand-section d-flex align-items-start justify-content-between gap-2">
+                    <div>
+                        <h4 class="fw-bolder mb-0 d-flex align-items-center gap-2" style="color: var(--primary);">
                         <i class="bi bi-layers-fill"></i> KELAR.IN
                     </h4>
                     <small class="text-muted fw-medium">Repository Universitas</small>
+                    </div>
                 </div>
                 
-                <div class="py-3 flex-grow-1">
+                <div class="sidebar-content py-3 flex-grow-1">
                     <div class="px-4 mb-2 text-uppercase fw-bold text-muted" style="font-size: 0.7rem; letter-spacing: 1px;">Menu Utama</div>
                     
                     @if(auth()->user()->isMahasiswa())
-                        <a href="{{ route('mahasiswa.dashboard') }}" class="nav-link-modern {{ request()->routeIs('mahasiswa.dashboard') ? 'active' : '' }}"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+                        <a href="{{ route('mahasiswa.dashboard') }}" class="nav-link-
+                        modern {{ request()->routeIs('mahasiswa.dashboard') ? 'active' : '' }}"><i class="bi bi-grid-1x2"></i> Dashboard</a>
                         <a href="{{ route('mahasiswa.sktl.create') }}" class="nav-link-modern {{ request()->routeIs('mahasiswa.sktl.*') ? 'active' : '' }}"><i class="bi bi-file-earmark-arrow-up"></i> Upload SKTL</a>
                         <a href="{{ route('mahasiswa.files.create') }}" class="nav-link-modern {{ request()->routeIs('mahasiswa.files.*') ? 'active' : '' }}"><i class="bi bi-folder-plus"></i> Upload {{ (auth()->user()->jurusan->jenjang ?? 'S1') === 'S3' ? 'Disertasi' : ((auth()->user()->jurusan->jenjang ?? 'S1') === 'S2' ? 'Tesis' : 'Skripsi') }}</a>
                         <a href="{{ route('mahasiswa.status') }}" class="nav-link-modern {{ request()->routeIs('mahasiswa.status') ? 'active' : '' }}"><i class="bi bi-activity"></i> Status Tracking</a>
@@ -212,7 +271,7 @@
                     <a href="{{ route('welcome') }}" class="nav-link-modern"><i class="bi bi-search"></i> Cari Dokumen</a>
                 </div>
                 
-                <div class="p-3 border-top border-light">
+                <div class="sidebar-footer p-3 border-top border-light">
                     <a href="{{ route('profile.edit') }}" class="nav-link-modern {{ request()->routeIs('profile.edit') ? 'active' : '' }} mb-1"><i class="bi bi-person-circle"></i> Profil Saya</a>
                     <a href="{{ route('logout') }}" class="nav-link-modern text-danger hover-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bi bi-box-arrow-right"></i> Keluar
@@ -220,14 +279,14 @@
                 </div>
             </div>
         </div>
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
         @endauth
 
-        <div class="main-wrapper w-100 {{ !auth()->check() ? 'ms-0 p-0' : '' }}">
             <!-- Top Navbar -->
-            <nav class="top-navbar d-flex justify-content-between align-items-center {{ !auth()->check() ? 'mx-3 mt-3' : '' }}">
+            <nav class="top-navbar d-flex justify-content-between align-items-center {{ !auth()->check() ? 'mx-1.6 mt-0.6' : '' }}">
                 <div class="d-flex align-items-center gap-3">
                     @auth
-                        <button class="btn btn-light d-lg-none rounded-circle shadow-sm" type="button" id="sidebarToggle">
+                        <button class="btn btn-light rounded-circle shadow-sm" type="button" id="sidebarToggle">
                             <i class="bi bi-list"></i>
                         </button>
                     @endauth
@@ -278,9 +337,10 @@
                 </div>
             </nav>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
+            <div class="main-wrapper {{ !auth()->check() ? 'ms-0 p-0' : '' }}">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
 
             <main class="fade-in-up">
                 @if(session('success'))
@@ -307,23 +367,38 @@
         </div>
     </div>
 
-    <!-- Mobile Sidebar Script -->
+    <!-- Sidebar Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleBtn = document.getElementById('sidebarToggle');
-            const sidebar = document.getElementById('sidebar');
-            if(toggleBtn && sidebar) {
-                toggleBtn.addEventListener('click', function() {
-                    sidebar.classList.toggle('d-none');
-                    sidebar.classList.toggle('position-absolute');
-                    sidebar.style.top = '0';
-                    sidebar.style.left = '0';
-                    sidebar.style.zIndex = '1050';
-                    sidebar.style.backgroundColor = 'rgba(0,0,0,0.5)';
-                    sidebar.style.width = '100vw';
-                });
+        document.addEventListener('DOMContentLoaded', function () {
+
+        const layout = document.querySelector('.layout-wrapper');
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('sidebarToggle');
+        const backdrop = document.getElementById('sidebarBackdrop');
+
+        toggleBtn.addEventListener('click', function () {
+
+            if (window.innerWidth < 992) {
+                sidebar.classList.toggle('show');
+            } else {
+                layout.classList.toggle('sidebar-collapsed');
             }
+
         });
+
+        backdrop.addEventListener('click', function () {
+            sidebar.classList.remove('show');
+        });
+
+        window.addEventListener('resize', function () {
+
+            if (window.innerWidth >= 992) {
+                sidebar.classList.remove('show');
+            }
+
+        });
+
+    });
     </script>
 </body>
 </html>
