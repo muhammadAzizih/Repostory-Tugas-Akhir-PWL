@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+use App\Http\Controllers\WelcomeController;
+
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/skripsi/{id}', [WelcomeController::class, 'show'])->name('skripsi.show');
 
 Auth::routes(['register' => false]);
 
