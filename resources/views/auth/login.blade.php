@@ -84,7 +84,7 @@
                     @csrf
 
                     <div class="mb-4">
-                        <label for="email" class="form-label fw-bold small text-uppercase text-muted" style="letter-spacing: 0.5px;">Alamat Email <span class="text-danger">*</span></label>
+                        <label for="email" class="form-label fw-bold small text-uppercase text-muted" style="letter-spacing: 0.5px;">Alamat Email</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light border-end-0 rounded-start-3 px-3 text-muted">
                                 <i class="bi bi-envelope"></i>
@@ -100,7 +100,7 @@
 
                     <div class="mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <label for="password" class="form-label fw-bold small text-uppercase text-muted mb-0" style="letter-spacing: 0.5px;">Kata Sandi <span class="text-danger">*</span></label>
+                            <label for="password" class="form-label fw-bold small text-uppercase text-muted mb-0" style="letter-spacing: 0.5px;">Kata Sandi</label>
                             @if (Route::has('password.request'))
                                 <a class="small fw-bold text-primary text-decoration-none" href="{{ route('password.request') }}">
                                     Lupa Password?
@@ -112,7 +112,6 @@
                                 <i class="bi bi-lock"></i>
                             </span>
                             <input id="password" type="password" class="form-control form-control-custom border-start-0 rounded-start-0 ps-0 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="••••••••">
-                            
                         </div>
                         @error('password')
                             <span class="text-danger small mt-2 d-block fw-medium">
@@ -145,20 +144,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-
-        if (togglePassword && passwordInput) {
-            togglePassword.addEventListener('click', function () {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.querySelector('i').classList.toggle('bi-eye');
-                this.querySelector('i').classList.toggle('bi-eye-slash');
-            });
-        }
-    });
-</script>
 @endsection
