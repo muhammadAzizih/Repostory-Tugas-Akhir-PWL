@@ -11,7 +11,7 @@
             </div>
             <div class="position-relative z-1">
                 <span class="badge bg-white text-primary mb-3 px-3 py-2 rounded-pill fw-bold">Selamat Datang</span>
-                <h3 class="fw-bolder mb-2 display-6">{{}}</h3>
+                <h3 class="fw-bolder mb-2 display-6">{{ auth()->user()->name }}</h3>
                 <p class="mb-0 opacity-75 fs-5">Selesaikan proses unggah dokumen skripsi Anda di sini.</p>
             </div>
         </div>
@@ -28,7 +28,7 @@
             </div>
             <h5 class="fw-bold text-dark">1. Upload SKTL</h5>
             <p class="text-muted small mb-4">Unggah Surat Keterangan Telah Lulus (SKTL) untuk diverifikasi oleh admin.</p>
-            <a href="{{ }}" class="btn btn-outline-primary rounded-pill w-100 fw-medium mt-auto">Mulai Upload</a>
+            <a href="{{ route('mahasiswa.sktl.create') }}" class="btn btn-outline-primary rounded-pill w-100 fw-medium mt-auto">Mulai Upload</a>
         </div>
     </div>
 
@@ -41,7 +41,7 @@
             </div>
             <h5 class="fw-bold text-dark">2. Upload File Skripsi</h5>
             <p class="text-muted small mb-4">Setelah SKTL disetujui, unggah file skripsi lengkap Anda (Cover, Abstrak, dll).</p>
-            <a href="{{ }}" class="btn btn-outline-primary rounded-pill w-100 fw-medium mt-auto">Lanjut Upload File</a>
+            <a href="{{ route('mahasiswa.files.create') }}" class="btn btn-outline-primary rounded-pill w-100 fw-medium mt-auto">Lanjut Upload File</a>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
             </div>
             <h5 class="fw-bold text-dark">3. Lacak Status</h5>
             <p class="text-muted small mb-4">Pantau terus perkembangan verifikasi dokumen Anda di menu status pengajuan.</p>
-            <a href="{{  }}" class="btn btn-primary-custom rounded-pill w-100 mt-auto">Cek Status Saya</a>
+            <a href="{{ route('mahasiswa.status') }}" class="btn btn-primary-custom rounded-pill w-100 mt-auto">Cek Status Saya</a>
         </div>
     </div>
 </div>
