@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KaprodiController;
 
 //PUBLIK
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
@@ -34,6 +35,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reupload-files', [MahasiswaController::class, 'reuploadFiles'])->name('files.reupload');
         Route::post('/reupload-files', [MahasiswaController::class, 'storeReuploadFiles'])->name('files.storeReupload');
         Route::get('/status', [MahasiswaController::class, 'status'])->name('status');
+    });
+
+    // === KAPRODI ===
+    Route::middleware(['role:Kaprodi'])->prefix('kaprodi')->name('kaprodi.')->group(function () {
+        Route::get('/dashboard', [KaprodiController::class, 'index'])->name('dashboard');
+        Route::get('/persetujuan', [KaprodiController::class, 'indexPersetujuan'])->name('persetujuan');
+        Route::post('/approve/{id}', [KaprodiController::class, 'approve'])->name('approve');
+        Route::get('/analitik', [KaprodiController::class, 'analitik'])->name('analitik');
     });
 
 });
