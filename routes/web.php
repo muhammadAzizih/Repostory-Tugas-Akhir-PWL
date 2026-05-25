@@ -2,18 +2,27 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\MahasiswaController;
 
+//PUBLIK
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/skripsi/{id}', [WelcomeController::class, 'show'])->name('skripsi.show');
 
 Auth::routes(['register' => false]);
 
+//BUTUH LOGIN
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/skripsi/{id}/download-skripsi', [WelcomeController::class, 'downloadSkripsi'])->name('skripsi.download');
+    
+//PROFILE
+ Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+ Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
+
+//MAHASISWA
     Route::middleware(['role:Mahasiswa'])->prefix('mahasiswa')->name('mahasiswa.')->group(function () {
         Route::get('/dashboard', [MahasiswaController::class, 'index'])->name('dashboard');
         Route::get('/upload-sktl', [MahasiswaController::class, 'createSktl'])->name('sktl.create');
