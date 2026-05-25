@@ -247,8 +247,7 @@
                     <div class="px-4 mb-2 text-uppercase fw-bold text-muted" style="font-size: 0.7rem; letter-spacing: 1px;">Menu Utama</div>
                     
                     @if(auth()->user()->isMahasiswa())
-                        <a href="{{ route('mahasiswa.dashboard') }}" class="nav-link-
-                        modern {{ request()->routeIs('mahasiswa.dashboard') ? 'active' : '' }}"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+                        <a href="{{ route('mahasiswa.dashboard') }}" class="nav-link-modern {{ request()->routeIs('mahasiswa.dashboard') ? 'active' : '' }}"><i class="bi bi-grid-1x2"></i> Dashboard</a>
                         <a href="{{ route('mahasiswa.sktl.create') }}" class="nav-link-modern {{ request()->routeIs('mahasiswa.sktl.*') ? 'active' : '' }}"><i class="bi bi-file-earmark-arrow-up"></i> Upload SKTL</a>
                         <a href="{{ route('mahasiswa.files.create') }}" class="nav-link-modern {{ request()->routeIs('mahasiswa.files.*') ? 'active' : '' }}"><i class="bi bi-folder-plus"></i> Upload {{ (auth()->user()->jurusan->jenjang ?? 'S1') === 'S3' ? 'Disertasi' : ((auth()->user()->jurusan->jenjang ?? 'S1') === 'S2' ? 'Tesis' : 'Skripsi') }}</a>
                         <a href="{{ route('mahasiswa.status') }}" class="nav-link-modern {{ request()->routeIs('mahasiswa.status') ? 'active' : '' }}"><i class="bi bi-activity"></i> Status Tracking</a>
@@ -358,6 +357,21 @@
                     </div>
                 @endif
                 
+                @if($errors->any())
+                    <div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger rounded-4 shadow-sm mb-4" role="alert">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i> 
+                            <div class="fw-bold">Terdapat Kesalahan:</div>
+                            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <ul class="mb-0 fw-medium">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 @yield('content')
             </main>
             

@@ -65,7 +65,7 @@
                 <div class="position-relative z-1">
                     <i class="bi bi-layers-fill display-3 mb-4 d-inline-block text-white"></i>
                     <h2 class="fw-bolder mb-3 display-6">KELAR.IN</h2>
-                    <p class="lead opacity-75 mb-0" style="font-size: 1.1rem;">Sistem Informasi Repositori Skripsi Digital Universitas Terbuka.</p>
+                    <p class="lead opacity-75 mb-0" style="font-size: 1.1rem;">Sistem Informasi Repositori Skripsi Tugas Akhir.</p>
                 </div>
             </div>
             
