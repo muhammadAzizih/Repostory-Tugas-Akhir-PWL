@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Dokumen</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-4">
+    <div class="mb-4">
+        <a href="#" class="text-decoration-none text-muted"><i class="bi bi-arrow-left me-1"></i> Kembali ke Pencarian</a>
+    </div>
+
+    <div class="card card-custom border-0 p-5 mb-5 shadow-sm">
+        <div class="row">
+            <div class="col-md-8 border-end pe-5">
+                <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill mb-3 px-3 py-2 fw-semibold">Nama Jurusan</span>
+                <h2 class="fw-bold text-dark mb-4">Judul Skripsi</h2>
+                
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-light rounded-circle p-3 d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                        <i class="bi bi-person-badge fs-4 text-secondary"></i>
+                    </div>
+                    <div>
+                        <p class="mb-0 text-muted small fw-bold text-uppercase">Penulis</p>
+                        <h5 class="mb-0 fw-semibold">Nama Mahasiswa</h5>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <div class="p-3 bg-light rounded-3 border">
+                            <p class="mb-1 text-muted small fw-bold text-uppercase">Fakultas</p>
+                            <p class="mb-0 fw-medium">Nama Fakultas</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="p-3 bg-light rounded-3 border">
+                            <p class="mb-1 text-muted small fw-bold text-uppercase">Tanggal Terbit</p>
+                            <p class="mb-0 fw-medium">01 Januari 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 ps-5 d-flex flex-column justify-content-center">
+                <div class="text-center mb-4">
+                    <div class="display-1 text-success mb-2"><i class="bi bi-shield-check"></i></div>
+                    <h5 class="fw-bold">Dokumen Terverifikasi</h5>
+                    <p class="text-muted small">Telah disetujui oleh Program Studi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="fw-bold mb-4">File Tersedia</h4>
+    <div class="row g-4">
+        <!-- Cover -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-custom h-100 border text-center p-4 hover-lift">
+                <div class="fs-1 text-danger mb-3"><i class="bi bi-file-earmark-pdf"></i></div>
+                <h6 class="fw-bold mb-3">Halaman Sampul</h6>
+                <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-primary w-100 rounded-pill"><i class="bi bi-eye me-1"></i> Lihat</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abstrak -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-custom h-100 border text-center p-4 hover-lift">
+                <div class="fs-1 text-danger mb-3"><i class="bi bi-file-earmark-pdf"></i></div>
+                <h6 class="fw-bold mb-3">Abstrak</h6>
+                <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-primary w-100 rounded-pill"><i class="bi bi-eye me-1"></i> Lihat</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bab 1-5 -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-custom h-100 border text-center p-4 hover-lift">
+                <div class="fs-1 text-danger mb-3 position-relative">
+                    <i class="bi bi-file-earmark-pdf"></i>
+                </div>
+                <h6 class="fw-bold mb-3">Dokumen Lengkap<br><small class="text-muted fw-normal">(Bab 1 - 5)</small></h6>
+                <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-success w-100 rounded-pill shadow-sm"><i class="bi bi-eye me-1"></i> Baca Dokumen</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daftar Pustaka -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-custom h-100 border text-center p-4 hover-lift">
+                <div class="fs-1 text-danger mb-3"><i class="bi bi-file-earmark-pdf"></i></div>
+                <h6 class="fw-bold mb-3">Daftar Pustaka</h6>
+                <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-primary w-100 rounded-pill"><i class="bi bi-eye me-1"></i> Lihat</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Turnitin -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-custom h-100 border text-center p-4 hover-lift">
+                <div class="fs-1 text-danger mb-3"><i class="bi bi-shield-check"></i></div>
+                <h6 class="fw-bold mb-3">Hasil Cek Turnitin</h6>
+                <div class="mt-auto">
+                    <span class="text-muted small">Tidak tersedia</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jurnal (S2/S3) -->
+        <div class="col-12 mt-4 pt-3 border-top">
+            <h5 class="fw-bold mb-4 text-muted"><i class="bi bi-journal-bookmark-fill me-2"></i>Bukti Publikasi Jurnal (S2/S3)</h5>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-custom h-100 border text-center p-4 hover-lift">
+                        <div class="fs-1 text-info mb-3"><i class="bi bi-file-earmark-pdf"></i></div>
+                        <h6 class="fw-bold mb-3">Bukti Jurnal Publikasi</h6>
+                        <div class="mt-auto">
+                            <a href="#" target="_blank" class="btn btn-outline-info text-dark w-100 rounded-pill"><i class="bi bi-eye me-1"></i> Lihat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
