@@ -1,40 +1,27 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profil</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <style>
-        .btn-primary-green {
-            background-color: #10b981;
-            border-color: #10b981;
-            color: #fff;
-        }
-        .btn-primary-green:hover {
-            background-color: #059669;
-            border-color: #059669;
-            color: #fff;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
 
+@section('page_title', 'Edit Profil')
+
+@section('content')
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card card-custom border-0 p-4">
             <h5 class="fw-bold mb-4">Pengaturan Akun</h5>
 
-            <form action="#" method="POST">
+            <form action="{{ route('profile.update') }}" method="POST">
+                @csrf
+                @method('PUT')
+
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Nama Lengkap</label>
-                    <input type="text" name="name" class="form-control bg-light border-0" value="" required>
+                    <input type="text" name="name" class="form-control bg-light border-0 @error('name') is-invalid @enderror" value="{{ old('name', $user->name) }}" required>
+                    @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Alamat Email</label>
-                    <input type="email" name="email" class="form-control bg-light border-0" value="" required>
+                    <input type="email" name="email" class="form-control bg-light border-0 @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}" required>
+                    @error('email') <span class="invalid-feedback">{{ $message }}</span> @enderror
                 </div>
 
                 <hr class="my-4">
@@ -42,7 +29,8 @@
                 <h6 class="fw-bold mb-3">Ubah Password <span class="text-muted small fw-normal">(Opsional)</span></h6>
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Password Baru</label>
-                    <input type="password" name="password" class="form-control bg-light border-0" placeholder="Kosongkan jika tidak ingin mengubah password">
+                    <input type="password" name="password" class="form-control bg-light border-0 @error('password') is-invalid @enderror" placeholder="Kosongkan jika tidak ingin mengubah password">
+                    @error('password') <span class="invalid-feedback">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="mb-4">
@@ -59,7 +47,4 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection
