@@ -18,6 +18,91 @@
     </div>
 </div>
 
+@if($skripsi)
+<div class="row mb-4">
+    <div class="col-12">
+        @if($skripsi->status === 'sktl_pending')
+            <div class="alert alert-info border-0 bg-info bg-opacity-10 text-info d-flex align-items-center rounded-4 shadow-sm p-4" role="alert">
+                <i class="bi bi-hourglass-split fs-2 me-3"></i>
+                <div class="flex-grow-1">
+                    <strong class="d-block mb-1" style="font-size: 1.1rem;">SKTL Menunggu Verifikasi</strong>
+                    <span>Dokumen Surat Keterangan Telah Lulus (SKTL) Anda sedang diperiksa oleh Operator. Harap tunggu proses verifikasi selesai.</span>
+                </div>
+                <div class="ms-3">
+                    <a href="{{ route('mahasiswa.status') }}" class="btn btn-info text-white rounded-pill px-4 btn-sm fw-bold">Detail Status</a>
+                </div>
+            </div>
+        @elseif($skripsi->status === 'sktl_rejected')
+            <div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger d-flex align-items-center rounded-4 shadow-sm p-4" role="alert">
+                <i class="bi bi-x-circle-fill fs-2 me-3"></i>
+                <div class="flex-grow-1">
+                    <strong class="d-block mb-1" style="font-size: 1.1rem;">SKTL Ditolak</strong>
+                    <span>Dokumen SKTL Anda ditolak dengan alasan: <strong>{{ $skripsi->sktl_rejection_category }}</strong>. Catatan: {{ $skripsi->sktl_rejection_notes ?? 'Tidak ada catatan tambahan.' }}</span>
+                </div>
+                <div class="ms-3">
+                    <a href="{{ route('mahasiswa.sktl.reupload') }}" class="btn btn-danger text-white rounded-pill px-4 btn-sm fw-bold">Upload Ulang</a>
+                </div>
+            </div>
+        @elseif($skripsi->status === 'sktl_verified')
+            <div class="alert alert-primary border-0 bg-primary bg-opacity-10 text-primary d-flex align-items-center rounded-4 shadow-sm p-4" role="alert">
+                <i class="bi bi-patch-check-fill fs-2 me-3"></i>
+                <div class="flex-grow-1">
+                    <strong class="d-block mb-1" style="font-size: 1.1rem;">SKTL Berhasil Diverifikasi! 🎉</strong>
+                    <span>Surat Keterangan Telah Lulus Anda telah disetujui. Langkah selanjutnya, silakan unggah berkas skripsi lengkap Anda.</span>
+                </div>
+                <div class="ms-3">
+                    <a href="{{ route('mahasiswa.files.create') }}" class="btn btn-primary text-white rounded-pill px-4 btn-sm fw-bold">Upload File</a>
+                </div>
+            </div>
+        @elseif($skripsi->status === 'files_pending')
+            <div class="alert alert-info border-0 bg-info bg-opacity-10 text-info d-flex align-items-center rounded-4 shadow-sm p-4" role="alert">
+                <i class="bi bi-hourglass-split fs-2 me-3"></i>
+                <div class="flex-grow-1">
+                    <strong class="d-block mb-1" style="font-size: 1.1rem;">Berkas Menunggu Verifikasi</strong>
+                    <span>Berkas skripsi lengkap Anda telah diunggah dan sedang diperiksa oleh Operator. Anda akan diberi tahu jika ada perubahan status.</span>
+                </div>
+                <div class="ms-3">
+                    <a href="{{ route('mahasiswa.status') }}" class="btn btn-info text-white rounded-pill px-4 btn-sm fw-bold">Detail Status</a>
+                </div>
+            </div>
+        @elseif($skripsi->status === 'files_rejected')
+            <div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger d-flex align-items-center rounded-4 shadow-sm p-4" role="alert">
+                <i class="bi bi-x-circle-fill fs-2 me-3"></i>
+                <div class="flex-grow-1">
+                    <strong class="d-block mb-1" style="font-size: 1.1rem;">Berkas Skripsi Ditolak</strong>
+                    <span>Dokumen berkas skripsi Anda ditolak karena: <strong>{{ $skripsi->file_rejection_category }}</strong>. Catatan: {{ $skripsi->file_rejection_notes ?? 'Tidak ada catatan tambahan.' }}</span>
+                </div>
+                <div class="ms-3">
+                    <a href="{{ route('mahasiswa.files.reupload') }}" class="btn btn-danger text-white rounded-pill px-4 btn-sm fw-bold">Upload Ulang</a>
+                </div>
+            </div>
+        @elseif($skripsi->status === 'files_verified')
+            <div class="alert alert-warning border-0 bg-warning bg-opacity-10 text-warning d-flex align-items-center rounded-4 shadow-sm p-4" role="alert">
+                <i class="bi bi-clock-history fs-2 me-3"></i>
+                <div class="flex-grow-1">
+                    <strong class="d-block mb-1" style="font-size: 1.1rem;">Menunggu Persetujuan Akhir</strong>
+                    <span>Berkas skripsi Anda telah lolos verifikasi dari Operator dan saat ini menunggu persetujuan akhir serta publikasi dari Ketua Program Studi.</span>
+                </div>
+                <div class="ms-3">
+                    <a href="{{ route('mahasiswa.status') }}" class="btn btn-warning text-dark rounded-pill px-4 btn-sm fw-bold">Detail Status</a>
+                </div>
+            </div>
+        @elseif($skripsi->status === 'published')
+            <div class="alert alert-success border-0 bg-success bg-opacity-10 text-success d-flex align-items-center rounded-4 shadow-sm p-4" role="alert">
+                <i class="bi bi-stars fs-2 me-3"></i>
+                <div class="flex-grow-1">
+                    <strong class="d-block mb-1" style="font-size: 1.1rem;">Selamat! Skripsi Anda Telah Terpublikasi 🎉</strong>
+                    <span>Karya ilmiah Anda telah disetujui oleh Kaprodi dan secara resmi masuk ke dalam repositori digital universitas.</span>
+                </div>
+                <div class="ms-3">
+                    <a href="{{ route('skripsi.show', $skripsi->id) }}" class="btn btn-success text-white rounded-pill px-4 btn-sm fw-bold">Lihat Publikasi</a>
+                </div>
+            </div>
+        @endif
+    </div>
+</div>
+@endif
+
 <div class="row g-4">
     <div class="col-md-4">
         <div class="card glass-card border-0 p-4 h-100 text-center" style="transition: transform 0.2s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">

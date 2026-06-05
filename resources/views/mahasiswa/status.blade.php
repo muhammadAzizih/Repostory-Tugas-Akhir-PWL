@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <td class="text-muted">Terakhir Update</td>
-                            <td class="fw-semibold">{{ $skripsi->updated_at->format('d M Y, H:i') }}</td>
+                            <td class="fw-semibold">{{ $skripsi->updated_at->translatedFormat('d M Y, H:i') }} WIB</td>
                         </tr>
                     </table>
                 </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="ms-4 ps-2">
                             <h6 class="fw-bold mb-1">Upload SKTL</h6>
-                            <p class="small text-muted mb-0">File SKTL berhasil diunggah pada {{ $skripsi->created_at->format('d M Y') }}.</p>
+                            <p class="small text-muted mb-0">File SKTL berhasil diunggah pada {{ $skripsi->created_at->translatedFormat('d M Y, H:i') }} WIB.</p>
                         </div>
                     </div>
 

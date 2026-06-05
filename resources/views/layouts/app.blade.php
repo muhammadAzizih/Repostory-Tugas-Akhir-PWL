@@ -134,27 +134,23 @@
 
         /* Navbar Modern */
         .top-navbar {
-            background: rgba(255, 255, 255, 0.82);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(18px) saturate(1.4);
             -webkit-backdrop-filter: blur(18px) saturate(1.4);
-            border-radius: 16px;
-            padding: 12px 24px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 16px rgba(0,0,0,.05), 0 0 0 1px rgba(255,255,255,.7) inset;
-            border: 1px solid rgba(255,255,255,.6);
+            border-radius: 0;
+            padding: 12px 30px;
+            box-shadow: 0 1px 10px rgba(0,0,0,.05);
+            border-bottom: 1px solid var(--border-color);
             position: fixed;
-            top: 12px;
-            left: 12px;
-            right: 12px;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 72px;
-            z-index: 1000;
+            z-index: 1050;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: box-shadow .3s, background .3s;
-        }
-        .top-navbar:hover {
-            box-shadow: 0 4px 24px rgba(0,0,0,.07), 0 0 0 1px rgba(255,255,255,.8) inset;
         }
 
         /* Footer */
@@ -216,6 +212,21 @@
                 margin-left: 0;
             }
             .top-navbar { top: 15px; }
+            .top-navbar h5 {
+                max-width: 160px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .guest-wrapper {
+            padding: 100px 24px 40px 24px !important;
+        }
+        @media (max-width: 991.98px) {
+            .guest-wrapper {
+                padding: 95px 16px 30px 16px !important;
+            }
         }
 
         /* Animations */
@@ -225,6 +236,24 @@
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(10px); }
             100% { opacity: 1; transform: none; }
+        }
+
+        /* Footer Modern styles */
+        .hover-primary:hover {
+            color: var(--primary-dark) !important;
+            transform: translateX(4px);
+        }
+        .hover-primary {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+        }
+        .footer-modern {
+            background: linear-gradient(135deg, rgba(209, 250, 229, 0.4) 0%, rgba(255, 255, 255, 0.75) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.05);
         }
     </style>
 </head>
@@ -268,10 +297,7 @@
                     
                     <div class="px-4 mt-4 mb-2 text-uppercase fw-bold text-muted" style="font-size: 0.7rem; letter-spacing: 1px;">Lainnya</div>
                     <a href="{{ route('welcome') }}" class="nav-link-modern"><i class="bi bi-search"></i> Cari Dokumen</a>
-                </div>
-                
-                <div class="sidebar-footer p-3 border-top border-light">
-                    <a href="{{ route('profile.edit') }}" class="nav-link-modern {{ request()->routeIs('profile.edit') ? 'active' : '' }} mb-1"><i class="bi bi-person-circle"></i> Profil Saya</a>
+                    <a href="{{ route('profile.edit') }}" class="nav-link-modern {{ request()->routeIs('profile.edit') ? 'active' : '' }}"><i class="bi bi-person-circle"></i> Profil Saya</a>
                     <a href="{{ route('logout') }}" class="nav-link-modern text-danger hover-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bi bi-box-arrow-right"></i> Keluar
                     </a>
@@ -282,7 +308,7 @@
         @endauth
 
             <!-- Top Navbar -->
-            <nav class="top-navbar d-flex justify-content-between align-items-center {{ !auth()->check() ? 'mx-1.6 mt-0.6' : '' }}">
+            <nav class="top-navbar d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-3">
                     @auth
                         <button class="btn btn-light rounded-circle shadow-sm" type="button" id="sidebarToggle">
@@ -336,7 +362,7 @@
                 </div>
             </nav>
 
-            <div class="main-wrapper {{ !auth()->check() ? 'ms-0 p-0' : '' }}">
+            <div class="main-wrapper {{ !auth()->check() ? 'ms-0 guest-wrapper' : '' }}">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
@@ -366,20 +392,94 @@
                         </div>
                         <ul class="mb-0 fw-medium">
                             @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+    
+                    @yield('content')
+                </main>
+                
+                <footer class="footer-modern mt-5 p-4 p-md-5">
+                    <div class="container-fluid px-0">
+                        <div class="row g-4">
+                            <div class="col-md-5 mb-4 mb-md-0">
+                                <h5 class="fw-bold text-success-emphasis mb-3 d-flex align-items-center gap-2" style="color: var(--primary-dark) !important;">
+                                    <i class="bi bi-layers-fill text-success" style="font-size: 1.5rem;"></i> KELAR.IN
+                                </h5>
+                                <p class="text-muted mb-4 small" style="max-width: 360px; line-height: 1.6;">
+                                    Sistem Repositori Tugas Akhir, Skripsi, Tesis, dan Disertasi Universitas. Memudahkan pengelolaan, pencarian, dan validasi karya ilmiah secara transparan dan terintegrasi.
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm text-white shadow-sm" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; border: none; padding: 0 !important;"><i class="bi bi-globe"></i></a>
+                                    <a href="#" class="btn btn-sm text-white shadow-sm" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; border: none; padding: 0 !important;"><i class="bi bi-youtube"></i></a>
+                                    <a href="#" class="btn btn-sm text-white shadow-sm" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; border: none; padding: 0 !important;"><i class="bi bi-twitter-x"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3 col-sm-6 mb-4 mb-sm-0">
+                                <h6 class="fw-bold text-success-emphasis text-uppercase mb-3 small" style="letter-spacing: 1px; color: var(--primary-dark) !important;">Navigasi Cepat</h6>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">
+                                        <a href="{{ route('welcome') }}" class="text-muted text-decoration-none small hover-primary d-flex align-items-center gap-1">
+                                            <i class="bi bi-chevron-right text-success small"></i> Cari Dokumen
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="{{ route('login') }}" class="text-muted text-decoration-none small hover-primary d-flex align-items-center gap-1">
+                                            <i class="bi bi-chevron-right text-success small"></i> Masuk Ke Sistem
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a href="#" class="text-muted text-decoration-none small hover-primary d-flex align-items-center gap-1">
+                                            <i class="bi bi-chevron-right text-success small"></i> Panduan Pengguna
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="col-md-4 col-sm-6">
+                                <h6 class="fw-bold text-success-emphasis text-uppercase mb-3 small" style="letter-spacing: 1px; color: var(--primary-dark) !important;">Hubungi Kami</h6>
+                                <ul class="list-unstyled mb-0 text-muted small">
+                                    <li class="d-flex gap-3 mb-3 align-items-center">
+                                        <div class="d-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle" style="width: 32px; height: 32px; flex-shrink: 0;">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </div>
+                                        <span>Gedung Rektorat Lt. 2, Kampus Pusat Universitas</span>
+                                    </li>
+                                    <li class="d-flex gap-3 mb-3 align-items-center">
+                                        <div class="d-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle" style="width: 32px; height: 32px; flex-shrink: 0;">
+                                            <i class="bi bi-envelope"></i>
+                                        </div>
+                                        <span>support@kelar.in</span>
+                                    </li>
+                                    <li class="d-flex gap-3 align-items-center">
+                                        <div class="d-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle" style="width: 32px; height: 32px; flex-shrink: 0;">
+                                            <i class="bi bi-clock"></i>
+                                        </div>
+                                        <span>Senin - Jumat: 08.00 - 16.00 WIB</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4 opacity-10" style="border-color: rgba(16, 185, 129, 0.15);">
+                        
+                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+                            <span class="text-muted small">&copy; {{ date('Y') }} KELAR.IN &bull; Kelompok 2 PWL. All rights reserved.</span>
+                            <div class="d-flex gap-3 text-muted small">
+                                <a href="#" class="text-muted text-decoration-none hover-primary">Kebijakan Privasi</a>
+                                <span>&bull;</span>
+                                <a href="#" class="text-muted text-decoration-none hover-primary">Syarat & Ketentuan</a>
+                            </div>
+                        </div>
                     </div>
-                @endif
-
-                @yield('content')
-            </main>
-            
-            <footer class="mt-5 pt-4 pb-2 text-center text-muted small">
-                <p>&copy; {{ date('Y') }} KELAR.IN - Repository Tugas Akhir Mahasiswa. All rights reserved.</p>
-            </footer>
-        </div>
+                </footer>
+            </div>
     </div>
+
+    @stack('modals')
 
     <!-- Sidebar Script -->
     <script>
@@ -390,27 +490,29 @@
         const toggleBtn = document.getElementById('sidebarToggle');
         const backdrop = document.getElementById('sidebarBackdrop');
 
-        toggleBtn.addEventListener('click', function () {
+        if (toggleBtn && sidebar && layout) {
+            toggleBtn.addEventListener('click', function () {
+                if (window.innerWidth < 992) {
+                    sidebar.classList.toggle('show');
+                } else {
+                    layout.classList.toggle('sidebar-collapsed');
+                }
+            });
+        }
 
-            if (window.innerWidth < 992) {
-                sidebar.classList.toggle('show');
-            } else {
-                layout.classList.toggle('sidebar-collapsed');
-            }
-
-        });
-
-        backdrop.addEventListener('click', function () {
-            sidebar.classList.remove('show');
-        });
-
-        window.addEventListener('resize', function () {
-
-            if (window.innerWidth >= 992) {
+        if (backdrop && sidebar) {
+            backdrop.addEventListener('click', function () {
                 sidebar.classList.remove('show');
-            }
+            });
+        }
 
-        });
+        if (sidebar) {
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 992) {
+                    sidebar.classList.remove('show');
+                }
+            });
+        }
 
     });
     </script>
