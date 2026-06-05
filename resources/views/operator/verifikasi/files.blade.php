@@ -71,6 +71,7 @@
         </div>
 
         <!-- Reject Modals -->
+        @push('modals')
         @foreach($skripsis as $skripsi)
                         <div class="modal fade" id="rejectModal{{ $skripsi->id }}" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
@@ -108,6 +109,7 @@
                             </div>
                         </div>
                     @endforeach
+                    @endpush
     @endif
 </div>
 @endsection

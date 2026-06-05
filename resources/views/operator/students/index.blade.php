@@ -66,6 +66,7 @@
                         </td>
                     </tr>
 
+                    @push('modals')
                     <!-- Edit Modal -->
                     <div class="modal fade" id="editStudentModal{{ $student->id }}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
@@ -103,6 +104,7 @@
                             </div>
                         </div>
                     </div>
+                    @endpush
                 @empty
                     <tr>
                         <td colspan="5" class="text-center py-5 text-muted">Belum ada data mahasiswa terdaftar.</td>
@@ -113,6 +115,7 @@
     </div>
 </div>
 
+@push('modals')
 <!-- Create Modal -->
 <div class="modal fade" id="createStudentModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -152,4 +155,5 @@
         </div>
     </div>
 </div>
+@endpush
 @endsection

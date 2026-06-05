@@ -131,61 +131,65 @@
                                     </div>
                                 </td>
                             </tr>
-
-                            <!-- Detail Modal (Omitted for brevity but assumed updated with nice styling) -->
-                            <div class="modal fade" id="detailModal{{ $skripsi->id }}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-dialog-centered">
-                                    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                                        <div class="modal-header border-0 bg-light p-4">
-                                            <h5 class="modal-title fw-bold text-dark"><i class="bi bi-file-text text-primary me-2"></i> Review Dokumen {{ (auth()->user()->jurusan->jenjang ?? 'S1') === 'S3' ? 'Disertasi' : ((auth()->user()->jurusan->jenjang ?? 'S1') === 'S2' ? 'Tesis' : 'Skripsi') }}</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body p-4 p-md-5">
-                                            <div class="row mb-4">
-                                                <div class="col-md-3 text-muted fw-semibold small text-uppercase">Judul</div>
-                                                <div class="col-md-9 fw-bolder fs-5 text-dark">{{ $skripsi->title }}</div>
-                                            </div>
-                                            <div class="row mb-4">
-                                                <div class="col-md-3 text-muted fw-semibold small text-uppercase">Penulis</div>
-                                                <div class="col-md-9 fw-medium"><img src="https://ui-avatars.com/api/?name={{ urlencode($skripsi->user->name) }}&background=e5e7eb&color=374151&rounded=true" width="24" height="24" class="rounded-circle me-2"> {{ $skripsi->user->name }}</div>
-                                            </div>
-                                            <div class="row mb-4">
-                                                <div class="col-md-3 text-muted fw-semibold small text-uppercase">Program Studi</div>
-                                                <div class="col-md-9 fw-medium">{{ $skripsi->jurusan->name }}</div>
-                                            </div>
-                                            
-                                            <div class="p-4 bg-light rounded-4 mt-5">
-                                                <h6 class="fw-bold mb-3 d-flex align-items-center gap-2"><i class="bi bi-folder-check text-success"></i> File Dokumen (Telah Diverifikasi)</h6>
-                                                <div class="d-flex flex-wrap gap-3">
-                                                    <a href="{{ asset('storage/' . $skripsi->cover_file_path) }}" target="_blank" class="btn btn-outline-danger bg-white rounded-pill px-4"><i class="bi bi-file-pdf me-1"></i> Cover</a>
-                                                    <a href="{{ asset('storage/' . $skripsi->abstrak_file_path) }}" target="_blank" class="btn btn-outline-danger bg-white rounded-pill px-4"><i class="bi bi-file-pdf me-1"></i> Abstrak</a>
-                                                    <a href="{{ route('skripsi.download', $skripsi->id) }}#toolbar=0" target="_blank" class="btn btn-outline-danger bg-white rounded-pill px-4"><i class="bi bi-eye-fill me-1"></i> Lihat Full {{ $skripsi->sebutan }}</a>
-                                                    <a href="{{ asset('storage/' . $skripsi->daftar_pustaka_file_path) }}" target="_blank" class="btn btn-outline-danger bg-white rounded-pill px-4"><i class="bi bi-file-pdf me-1"></i> Daftar Pustaka</a>
-                                                    @if($skripsi->jurnal_file_path)
-                                                        <a href="{{ asset('storage/' . $skripsi->jurnal_file_path) }}" target="_blank" class="btn btn-outline-info bg-white text-dark rounded-pill px-4"><i class="bi bi-journal me-1"></i> Jurnal</a>
-                                                    @endif
-                                                    @if($skripsi->turnitin_file_path)
-                                                        <a href="{{ asset('storage/' . $skripsi->turnitin_file_path) }}" target="_blank" class="btn btn-outline-info bg-white text-dark rounded-pill px-4"><i class="bi bi-shield-check me-1"></i> Turnitin</a>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer border-0 bg-light p-4">
-                                            <button type="button" class="btn btn-light rounded-pill px-4 fw-medium" data-bs-dismiss="modal">Tutup</button>
-                                            <form action="{{ route('kaprodi.approve', $skripsi->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-success rounded-pill px-5 shadow-sm fw-bold">
-                                                    <i class="bi bi-check-circle me-1"></i> Approve & Publikasi
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+
+                @push('modals')
+                {{-- Modal detail dipindahkan di luar tabel agar tidak memicu bug backdrop gelap --}}
+                @foreach($skripsis as $skripsi)
+                <div class="modal fade" id="detailModal{{ $skripsi->id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                            <div class="modal-header border-0 bg-light p-4">
+                                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-file-text text-primary me-2"></i> Review Dokumen {{ (auth()->user()->jurusan->jenjang ?? 'S1') === 'S3' ? 'Disertasi' : ((auth()->user()->jurusan->jenjang ?? 'S1') === 'S2' ? 'Tesis' : 'Skripsi') }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4 p-md-5">
+                                <div class="row mb-4">
+                                    <div class="col-md-3 text-muted fw-semibold small text-uppercase">Judul</div>
+                                    <div class="col-md-9 fw-bolder fs-5 text-dark">{{ $skripsi->title }}</div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-3 text-muted fw-semibold small text-uppercase">Penulis</div>
+                                    <div class="col-md-9 fw-medium"><img src="https://ui-avatars.com/api/?name={{ urlencode($skripsi->user->name) }}&background=e5e7eb&color=374151&rounded=true" width="24" height="24" class="rounded-circle me-2"> {{ $skripsi->user->name }}</div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-3 text-muted fw-semibold small text-uppercase">Program Studi</div>
+                                    <div class="col-md-9 fw-medium">{{ $skripsi->jurusan->name }}</div>
+                                </div>
+                                
+                                <div class="p-4 bg-light rounded-4 mt-5">
+                                    <h6 class="fw-bold mb-3 d-flex align-items-center gap-2"><i class="bi bi-folder-check text-success"></i> File Dokumen (Telah Diverifikasi)</h6>
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <a href="{{ asset('storage/' . $skripsi->cover_file_path) }}" target="_blank" class="btn btn-outline-danger bg-white rounded-pill px-4"><i class="bi bi-file-pdf me-1"></i> Cover</a>
+                                        <a href="{{ asset('storage/' . $skripsi->abstrak_file_path) }}" target="_blank" class="btn btn-outline-danger bg-white rounded-pill px-4"><i class="bi bi-file-pdf me-1"></i> Abstrak</a>
+                                        <a href="{{ route('skripsi.download', $skripsi->id) }}#toolbar=0" target="_blank" class="btn btn-outline-danger bg-white rounded-pill px-4"><i class="bi bi-eye-fill me-1"></i> Lihat Full {{ $skripsi->sebutan }}</a>
+                                        <a href="{{ asset('storage/' . $skripsi->daftar_pustaka_file_path) }}" target="_blank" class="btn btn-outline-danger bg-white rounded-pill px-4"><i class="bi bi-file-pdf me-1"></i> Daftar Pustaka</a>
+                                        @if($skripsi->jurnal_file_path)
+                                            <a href="{{ asset('storage/' . $skripsi->jurnal_file_path) }}" target="_blank" class="btn btn-outline-info bg-white text-dark rounded-pill px-4"><i class="bi bi-journal me-1"></i> Jurnal</a>
+                                        @endif
+                                        @if($skripsi->turnitin_file_path)
+                                            <a href="{{ asset('storage/' . $skripsi->turnitin_file_path) }}" target="_blank" class="btn btn-outline-info bg-white text-dark rounded-pill px-4"><i class="bi bi-shield-check me-1"></i> Turnitin</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-0 bg-light p-4">
+                                <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+                                <form action="{{ route('kaprodi.approve', $skripsi->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success rounded-pill px-5 shadow-sm fw-bold">
+                                        <i class="bi bi-check-circle me-1"></i> Approve & Publikasi
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @endpush
             @endif
         </div>
     </div>

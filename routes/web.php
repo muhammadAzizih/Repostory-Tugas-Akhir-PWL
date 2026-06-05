@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
         
         // Riwayat & Statistik
         Route::get('/riwayat', [OperatorController::class, 'riwayat'])->name('riwayat');
+        Route::get('/riwayat/{id}', [OperatorController::class, 'riwayatDetail'])->name('riwayat.detail');
         Route::get('/publikasi', [OperatorController::class, 'indexPublished'])->name('publikasi');
         Route::delete('/skripsi/{id}', [OperatorController::class, 'destroySkripsi'])->name('skripsi.destroy');
         Route::get('/statistik', [OperatorController::class, 'statistik'])->name('statistik');
