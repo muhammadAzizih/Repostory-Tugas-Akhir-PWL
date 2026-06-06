@@ -40,6 +40,7 @@ Operator berfokus pada validasi dokumen dan administrasi pengguna.
 - Melakukan **Verifikasi Tahap 1**: Memeriksa keabsahan dokumen SKTL.
 - Melakukan **Verifikasi Tahap 2**: Memeriksa kelengkapan file skripsi & pendukung (Cover, Abstrak, Skripsi, Dapus, Turnitin, serta Jurnal untuk S2/S3).
 - Memberikan status penolakan dengan alasan yang jelas apabila file tidak memenuhi syarat.
+- operator dapat melihat riwayat uplotan dari mahasiswa dan jurnal terpublis dan operator bisa menghapush jurnal yang sudah ter publis jika kaprodi tidak sengaja melakukan kesalahan pada saat approve tugas akhir mahasiswa 
 
 #### 3. Ketua Program Studi (Kaprodi)
 Kaprodi berperan sebagai pimpinan akademik yang memberikan izin publikasi.
