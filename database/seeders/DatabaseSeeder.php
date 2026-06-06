@@ -19,6 +19,66 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // ══════════════════════════════════════════════════════════════
+        // 0. SALIN DOKUMEN DUMMY DARI GIT KE FOLDER STORAGE
+        // ══════════════════════════════════════════════════════════════
+        $s1Src = base_path("dummy_skripsi");
+        $s2Src = base_path("dokumen_dummy_tesis_s2 (1)");
+
+        $mappings = [
+            "$s1Src/SKTL_dummy.pdf" => [
+                storage_path("app/public/uploads/sktl/s1_sktl_sample.pdf"),
+                storage_path("app/private/uploads/sktl/s1_sktl_sample.pdf")
+            ],
+            "$s1Src/01_Cover.pdf" => [
+                storage_path("app/public/uploads/cover/s1_cover_sample.pdf")
+            ],
+            "$s1Src/02_Abstrak.pdf" => [
+                storage_path("app/public/uploads/abstrak/s1_abstrak_sample.pdf")
+            ],
+            "$s1Src/Bab_1-5_Gabungan.pdf" => [
+                storage_path("app/private/uploads/skripsi/s1_skripsi_sample.pdf")
+            ],
+            "$s1Src/08_Daftar_Pustaka.pdf" => [
+                storage_path("app/public/uploads/daftar_pustaka/s1_daftar_pustaka_sample.pdf")
+            ],
+            "$s2Src/hasil_cek_plagiasi_turnitin.pdf" => [
+                storage_path("app/public/uploads/turnitin/s1_turnitin_sample.pdf"),
+                storage_path("app/public/uploads/turnitin/s2_turnitin_sample.pdf")
+            ],
+            "$s2Src/sktl_s2.pdf" => [
+                storage_path("app/public/uploads/sktl/s2_sktl_sample.pdf"),
+                storage_path("app/private/uploads/sktl/s2_sktl_sample.pdf")
+            ],
+            "$s2Src/halaman_depan.pdf" => [
+                storage_path("app/public/uploads/cover/s2_cover_sample.pdf")
+            ],
+            "$s2Src/abstrak.pdf" => [
+                storage_path("app/public/uploads/abstrak/s2_abstrak_sample.pdf")
+            ],
+            "$s2Src/dummy_tesis.pdf" => [
+                storage_path("app/private/uploads/skripsi/s2_skripsi_sample.pdf")
+            ],
+            "$s2Src/daftar_pustaka.pdf" => [
+                storage_path("app/public/uploads/daftar_pustaka/s2_daftar_pustaka_sample.pdf")
+            ],
+            "$s2Src/bukti_publikasi_jurnal.pdf" => [
+                storage_path("app/public/uploads/jurnal/s2_jurnal_sample.pdf")
+            ]
+        ];
+
+        foreach ($mappings as $src => $targets) {
+            if (file_exists($src)) {
+                foreach ($targets as $target) {
+                    $dir = dirname($target);
+                    if (!is_dir($dir)) {
+                        mkdir($dir, 0777, true);
+                    }
+                    copy($src, $target);
+                }
+            }
+        }
+
         $this->call([
             RoleSeeder::class,
             FakultasJurusanSeeder::class,
