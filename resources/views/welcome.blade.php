@@ -431,6 +431,8 @@
     box-shadow: 0 4px 12px rgba(16,185,129,.25);
 }
 .pagination-wrap .page-item.disabled .page-link { opacity: .4; }
+.pagination-wrap p { display: none !important; }
+.pagination-wrap div { justify-content: center !important; }
 
 @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; }
@@ -698,7 +700,7 @@
 
     {{-- Pagination --}}
     <div class="pagination-wrap">
-        {{ $skripsis->withQueryString()->links() }}
+        {{ $skripsis->withQueryString()->links('pagination::bootstrap-5') }}
     </div>
 
 </div>
